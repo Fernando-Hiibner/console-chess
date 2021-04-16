@@ -48,7 +48,8 @@ int main()
 
     MoveWindow(consoleWindow, 0, 0, 656, 680, TRUE);
 
-    SetWindowLong(consoleWindow, GWL_STYLE, GetWindowLong(consoleWindow, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_SIZEBOX);    
+    //Remove this function from comment if you dont want the screen to be resizable
+    //SetWindowLong(consoleWindow, GWL_STYLE, GetWindowLong(consoleWindow, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_SIZEBOX);    
 
     DWORD bytesWritten = 0;
 
