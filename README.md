@@ -14,6 +14,9 @@ ESC -> Deselect a selected piece;
 I -> Debug tool (Left as a cheat) that opens a menu to insert pieces on cursor position;  
 O - > Debug tool (Left as a cheat) that deletes a piece;  
 
+## IMPORTANT!!:  
+If your chess start in a really bizarre shape, resize the screen to fit the exactly the chessboard size.
+(Chessboard size is 8x8)
 
 ## Images:
 ### Game View:  
