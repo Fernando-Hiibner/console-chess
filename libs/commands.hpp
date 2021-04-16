@@ -11,7 +11,7 @@ bool keyPressed(char key)
 {
     //Acording to my researchs this 0x800 is basicaly the time that it will wait before refreshing and wait for another
     //0x80 its litle and 0x8000 its a lot
-    if(0x800 && GetAsyncKeyState((unsigned short)key))
+    if(0x800 && GetAsyncKeyState((unsigned short)key) && GetConsoleWindow() == GetForegroundWindow())
     {
         return true;
     }
