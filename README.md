@@ -6,6 +6,15 @@ Compiled using g++:
 g++ -DUNICODE chess.cpp -o chess
 ~~~
 
+## How to play:  
+WASD -> Moves the cursor;  
+ENTER -> Select a piece;  
+ENTER (With a selected piece) -> Place the piece in the cursor position (if the piece can do that move);  
+ESC -> Deselect a selected piece;  
+I -> Debug tool (Left as a cheat) that opens a menu to insert pieces on cursor position;  
+O - > Debug tool (Left as a cheat) that deletes a piece;  
+
+
 ## Images:
 ### Game View:  
 ![Normal Game Init](/images/GameInitView.png)  
