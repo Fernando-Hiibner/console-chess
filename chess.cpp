@@ -41,7 +41,7 @@ int main()
         https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
         On the "Text Formating" section
     */
-
+   
     SetConsoleActiveScreenBuffer(hConsole);
 
     HWND consoleWindow = GetConsoleWindow();

@@ -10,20 +10,20 @@ typedef struct enPassantData
     COORD pieceCoord;
     COORD vulnerablePositionCoord;
 
-    enPassantData(bool canSuffer, COORD coordVulneravel)
+    enPassantData(bool canSuffer, COORD vulnerableCoord)
     {
         canSufferEnPassant = canSuffer;
-        vulnerablePositionCoord = coordVulneravel;
+        vulnerablePositionCoord = vulnerableCoord;
     }
     enPassantData(bool canSuffer)
     {
         canSufferEnPassant = canSuffer;
     }
-    void defineEnPassantData(bool canSuffer, COORD coordVulneravel, COORD pieceCoord)
+    void defineEnPassantData(bool canSuffer, COORD vulnerableCoord, COORD actualPieceCoord)
     {
         canSufferEnPassant = canSuffer;
-        pieceCoord = pieceCoord;
-        vulnerablePositionCoord = coordVulneravel;
+        pieceCoord = actualPieceCoord;
+        vulnerablePositionCoord = vulnerableCoord;
     }
 }enPassantData;
 
