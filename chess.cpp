@@ -14,7 +14,8 @@
 //This essentialy create the screen "write buffer", with pre-define width and height
 extern const int screenWidth = 80, screenHeight = 40;
 wchar_t *screen = new wchar_t[screenWidth*screenHeight];
-HANDLE hConsole = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);;
+HANDLE hConsole = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+DWORD bytesWritten = 0;  
 
 wstring piecesPositon; //Holds the pieces position on a wstring that can be easily processed by the graphical function
 COORD selectedPiecePosition;
@@ -30,6 +31,30 @@ COORD whiteKingCoord = {(SHORT)40, (SHORT)35};
 COORD blackKingCoord = {(SHORT)40, (SHORT)0};
 
 using namespace std;
+wchar_t pawnPromotion(wchar_t pieceId)
+{
+    while(1)
+    {
+        swprintf(screen, 70, L"Pawn promotion, press: D - Queen / T - Rook / B - Bishop / C - Knight");
+        if(keyPressed('D'))
+        {
+            return (islower(pieceId))? 'd' : 'D';
+        }
+        else if(keyPressed('T'))
+        {
+            return (islower(pieceId))? 't' : 'T';
+        }
+        else if(keyPressed('B'))
+        {
+            return (islower(pieceId))? 'b' : 'B';
+        }
+        else if(keyPressed('C'))
+        {
+            return (islower(pieceId))? 'c' : 'C';
+        }
+        WriteConsoleOutputCharacter(hConsole, screen, screenWidth * screenHeight, {0, 0}, &bytesWritten);                            
+    }
+}
 int main()
 {
     /*
@@ -49,9 +74,7 @@ int main()
     MoveWindow(consoleWindow, 0, 0, 656, 680, TRUE);
 
     //Remove this function from comment if you dont want the screen to be resizable
-    //SetWindowLong(consoleWindow, GWL_STYLE, GetWindowLong(consoleWindow, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_SIZEBOX);    
-
-    DWORD bytesWritten = 0;
+    //SetWindowLong(consoleWindow, GWL_STYLE, GetWindowLong(consoleWindow, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_SIZEBOX);
 
     wstring chessboard; //Holds the chessboard squares on a wsring that can be easily processed by the graphical function
     chessboard += L" # # # #";
@@ -311,6 +334,10 @@ int main()
                             COORD reducedEnPassantCoord = reduceCoord(enPassant.pieceCoord);
                         
                             piecesPositon[reducedEnPassantCoord.Y*mapWidth+reducedEnPassantCoord.X] = '.';
+                        }
+                        else if(desiredPosition.Y == 0 || desiredPosition.Y == 35)
+                        {
+                            selectedPieceId = pawnPromotion(selectedPieceId);
                         }
                     }
                     calculateCheck = true;

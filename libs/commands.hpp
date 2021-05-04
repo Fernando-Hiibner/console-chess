@@ -5,6 +5,7 @@
 
 extern HANDLE hConsole;
 extern chrono::system_clock::time_point lastCommandTime;
+extern const int screenWidth, screenHeight;
 
 using namespace std;
 bool keyPressed(char key)
@@ -17,10 +18,13 @@ bool keyPressed(char key)
     }
     return false;
 }
-COORD moveCursor(int xOffset, int yOffset )
+COORD moveCursor(int xOffset, int yOffset)
 {
     COORD cursorPosition = actualCursorPosition();
-    cursorPosition = {(SHORT)(cursorPosition.X+xOffset), (SHORT)(cursorPosition.Y+yOffset)};
+    if(cursorPosition.X+xOffset < screenWidth && cursorPosition.Y+yOffset < screenHeight)
+    {
+        cursorPosition = {(SHORT)(cursorPosition.X+xOffset), (SHORT)(cursorPosition.Y+yOffset)};
+    }
     SetConsoleCursorPosition(hConsole, cursorPosition);
     lastCommandTime = chrono::system_clock::now();
     return cursorPosition;
